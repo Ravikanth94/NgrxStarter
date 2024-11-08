@@ -1,0 +1,71 @@
+.users-container {
+  border: 1px solid mediumturquoise;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 20px;
+  }
+
+  td,
+  th {
+    border: 1px solid #d6eeee;
+    text-align: left;
+  }
+  th {
+    font-weight: 400;
+    font-size: 16px;
+    padding-left: 20px;
+  }
+  td {
+    padding: 8px;
+    input {
+      height: 26px;
+      font-size: 16px;
+      width: 96%;
+    }
+    input[disabled] {
+      background: transparent;
+      border: none;
+    }
+    input#userId {
+      width: 96px;
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      margin: auto;
+      text-align: center;
+    }
+    button {
+      width: 100px;
+      font-size: 16px;
+      background: none;
+      background-color: lightseagreen;
+      border: 1px solid;
+      color: white;
+      height: 28px;
+      border-radius: 15px;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+    button[disabled] {
+      cursor: not-allowed;
+      background-color: aliceblue;
+      color: darkgrey;
+    }
+    button ~ button {
+      margin-left: 10px;
+    }
+  }
+  td.actions {
+    width: 210px;
+  }
+  tr {
+    height: 50px;
+  }
+  tr:nth-child(even) {
+    background-color: #d6eeee;
+  }
+}

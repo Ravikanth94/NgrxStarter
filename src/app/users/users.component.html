@@ -1,0 +1,36 @@
+<div class="users-container"> 
+    <form [formGroup]="usersFormGroup">
+        <table formArrayName="users">
+            <tr>
+                <th style="width:100px">UserID</th>
+                <th>Name</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+            <ng-container *ngFor="let user of userFormArray.controls; let index = index">
+                <tr [formGroupName]="index">
+                    <td><input id="userId" formControlName="id"/></td>
+                    <td><input formControlName="name"/></td>
+                    <td><input formControlName="username"/></td>
+                    <td><input formControlName="email"/></td>
+                    <td class="actions">
+                        <button (click)="onEditClick(index)" [disabled]="!user.disabled">
+                            Edit
+                        </button>
+                        <button (click)="saveUser(index)" [disabled]="user.disabled">
+                            Save
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+        </table>
+    </form>
+</div>
+
+
+
+  
+
+   
+

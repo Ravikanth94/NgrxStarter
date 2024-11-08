@@ -1,0 +1,53 @@
+<div class="users-container">
+  <form [formGroup]="usersFormGroup">
+    <table formArrayName="users">
+      <tr>
+        <th style="width: 100px">UserID</th>
+        <th>Name</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+      <ng-container *ngIf="!isLoading">
+        <ng-container
+          *ngFor="
+            let user of users$ | async;
+            let index = index;
+            trackBy: trackByFn
+          "
+        >
+          <tr
+            *ngIf="isFormGroupPresentForUser(index); else rowTemplate"
+            [formGroup]="getUserFormGroupAtIndex(index)"
+          >
+            <td><input id="userId" formControlName="id" /></td>
+            <td><input appAutoFocus formControlName="name"/></td>
+            <td><input formControlName="username" /></td>
+            <td><input formControlName="email" /></td>
+            <td class="actions">
+              <button disabled>Edit</button>
+              <button (click)="saveUser(index)">Save</button>
+            </td>
+          </tr>
+          <ng-template #rowTemplate>
+            <tr>
+              <td id="userId">{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.email }}</td>
+              <td class="actions">
+                <button (click)="createFormGroupForUser(index, user)">
+                  Edit
+                </button>
+                <button disabled>Save</button>
+              </td>
+            </tr>
+          </ng-template>
+        </ng-container>
+      </ng-container>
+      <tr id="loading" *ngIf="isLoading">
+        <td colspan="5">Loading...</td>
+      </tr>
+    </table>
+  </form>
+</div>

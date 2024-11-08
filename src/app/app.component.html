@@ -1,1 +1,15 @@
-<home></home>
+<div class="app-container">
+  <div class="tab-container">
+    <a
+      class="tab"
+      *ngFor="let tab of tabs$ | async"
+      routerLink="{{tab.url}}"
+      routerLinkActive="active"
+    >
+      {{ tab.name }}
+    </a>
+  </div>
+  <div class="child-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
