@@ -4,6 +4,7 @@ import { catchError, map, mergeMap, of } from 'rxjs';
 import { UsersService } from '../users.service';
 import { Injectable } from '@angular/core';
 import { IUser } from './users.state';
+import { Update } from './users.actions';
 
 @Injectable()
 export class UsersEffects {
@@ -68,7 +69,7 @@ export class UsersEffects {
         return this.usersService.updateUserById(props.user).pipe(
           map((user: any) =>
             UsersActions.UpdateUserByIdSuccess({
-              user: props.user as IUser,
+              user: props.user as Update<IUser>,
               isLoading: false,
               error: '',
             })

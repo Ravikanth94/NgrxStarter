@@ -1,6 +1,16 @@
 import { createAction, props } from '@ngrx/store';
 import { IUser } from './users.state';
 
+interface UpdateNum<T> {
+  id: number;
+  name: string;
+  username:string;
+  email:string;
+  changes: Partial<T>;
+}
+
+export type Update<T> = UpdateNum<T>;
+
 export const InvokeUsersGetAPI = createAction('[USERS] INVOKE_GET_API_V2');
 export const GetUsersAPISuccess = createAction(
   '[USERS] GET_API_SUCCESS_V2',
@@ -31,8 +41,8 @@ export const InvokeUpdateUserAPI = createAction(
 );
 
 export const UpdateUserByIdSuccess = createAction(
-  '[USERS] UPDATE_USER_SUCCESSv',
-  props<{ user: IUser; isLoading: boolean; error: string }>()
+  '[USERS] UPDATE_USER_SUCCESS',
+  props<{ user: Update<IUser>; isLoading: boolean; error: string }>()
 );
 
 export const UpdateUserByIdFailure = createAction(

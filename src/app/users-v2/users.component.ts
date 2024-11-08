@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { map, Observable, of } from 'rxjs';
 import { IUser } from './store/users.state';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {selectUserIds, selectAllUsersSelector, selectCurrentUserId, getSelectedUserId} from './store/users.selector2';
+
 
 @Component({
   selector: 'app-users',
@@ -13,6 +15,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 
 export class UsersComponent implements OnInit {
   users$:Observable<UserState.IUser[]>;
+  usersV2$:Observable<UserState.IUser[]>;
   isLoading: boolean;
   usersFormGroup: FormGroup;
 
@@ -21,7 +24,10 @@ export class UsersComponent implements OnInit {
     this.isLoading = true;
     this.usersFormGroup = this.formBuilder.group({
       users: this.formBuilder.array([])
-    })
+    });
+    //this.store.select(selectCurrentUserId).subscribe((res)=> console.log(res))
+    this.store.select(selectUserIds).subscribe((res)=> console.log(res))
+    this.usersV2$ = this.store.select(selectAllUsersSelector);
    }
 
    get userFormArray(){
